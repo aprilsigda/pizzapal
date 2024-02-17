@@ -34,10 +34,6 @@ def pizzas_put():
 def pizzas_delete():
     return
 
-@api.route('/login')
-def login():
-    return
-
 @api.route('/login', methods=['POST'])
 def login_post():
     return

@@ -1,13 +1,14 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from .api import api
+from .pages import pages
 
 app = Flask(__name__)
 
-app.register_blueprint(api)
+db = SQLAlchemy()
 
-@app.route("/")
-def index():
-    return "It works!"
+app.register_blueprint(api)
+app.register_blueprint(pages)
 
 if __name__ == "__main__":
     app.run()
