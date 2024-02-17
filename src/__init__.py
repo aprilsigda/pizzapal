@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 db = SQLAlchemy()
 
-app.register_blueprint(api)
 app.register_blueprint(pages)
 
 if __name__ == "__main__":
