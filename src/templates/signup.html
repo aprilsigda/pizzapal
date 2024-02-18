@@ -1,0 +1,18 @@
+{% extends "auth.html" %}
+
+{% block title %}Signup{% endblock %}
+
+{% block action %}signup{% endblock %}
+
+{% block roles %}
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="role" id="manager" value="manager">
+        <label class="form-check-label" for="manager">Manager</label>
+    </div>
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="radio" name="role" id="chef" value="chef" checked>
+        <label class="form-check-label" for="chef">Chef</label>
+    </div>
+{% endblock %}
+
+{% block btntext %}Signup{% endblock %}

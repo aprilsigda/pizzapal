@@ -1,4 +1,5 @@
-from flask import Blueprint
+from flask import Blueprint, render_template, redirect
+from flask_login import current_user
 
 pages = Blueprint('pages', __name__)
 
@@ -6,14 +7,11 @@ pages = Blueprint('pages', __name__)
 def index():
     return
 
-@pages.route('/login')
-def login():
-    return
-
 @pages.route('/home')
 def home():
-    return
-
-@pages.route('/logout')
-def logout():
-    return
+    if not current_user.is_authenticated:
+        return redirect('/login')
+    elif current_user.role == 'chef':
+        return render_template('chefhome.html')
+    elif current_user.role == 'manager':
+        return render_template('managerhome.html')

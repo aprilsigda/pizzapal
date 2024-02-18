@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="max-width: 500px; margin: auto">
+    <h1 class="mb-3">{% block title %}{% endblock %}</h1>
+    <form method="POST" action="/{% block action %}{% endblock %}">
+        <div class="form-floating mb-3">
+            <input type="username" class="form-control" id="username" name="username" placeholder="User Name" autofocus="">
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="password">Password</label>
+        </div>
+    {% block roles %}{% endblock %}
+        <button type="submit" class="btn btn-primary">{% block btntext %}{% endblock %}</button>
+    </form>
+</div>
+
+{% endblock %}

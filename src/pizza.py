@@ -1,5 +1,5 @@
-from ..models import Pizza, PizzaToppings
-from . import db
+from .models import Pizza, PizzaToppings
+from .database import db
 
 def get_pizzas():
     return db.session.select(Pizza)
