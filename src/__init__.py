@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from .pages import pages
 from .auth import auth
+from .topping import topping
 from .database import db
 from . import models
 
@@ -22,6 +23,7 @@ def load_user(user_id):
 
 app.register_blueprint(pages)
 app.register_blueprint(auth)
+app.register_blueprint(topping)
 
 if __name__ == "__main__":
     app.run()
