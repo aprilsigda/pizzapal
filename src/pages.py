@@ -15,4 +15,4 @@ def home():
     elif current_user.role == 'chef':
         return render_template('chefhome.html')
     elif current_user.role == 'manager':
-        return render_template('managerhome.html', toppings=models.Topping.query.all(), category='/topping')
+        return render_template('managerhome.html', items=models.Topping.query.all(), category='topping')

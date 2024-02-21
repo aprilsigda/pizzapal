@@ -32,8 +32,7 @@
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="item" value="{{ item.id }}">
             <div class="col-11">
-                {% block editformitems %}
-                <input type="text" id="item-{{ item.id }}-new-name" name="newname" value="{{ item.name }}" placeholder="{{ category }} name">
+                {% block editformitems scoped %}
                 {% endblock %}
             </div>
             <div class="col-1">
@@ -56,7 +55,8 @@
         <div class="row collapse bg-dark-subtle p-2 border border-top-0 border-black border-2" id="additem">
             <input type="hidden" name="_method" value="POST">
             <div class="col-11">
-                {{ self.editformitems() }}
+                {% block addformitems %}
+                {% endblock %}
             </div>
             <div class="col-1">
                 <button type="submit" class="btn btn-primary w-100">
