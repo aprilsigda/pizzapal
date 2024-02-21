@@ -2,6 +2,69 @@
 
 {% block content %}
 
-<h1 class="title">succ</h1>
+<h1 class="title">Manage {{ category }}s</h1>
+
+<div class="container-xxl p-1">
+    {% for item in items %}
+    <div class="row bg-body-secondary p-2 border border-bottom-0 border-black border-2">
+        <div class="col-10">{{ item.name }}</div>
+        <div class="col-1">
+            <button class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#item-{{ item.id }}" aria-expanded="false" aria-condivols="item{{ item.id }}">
+                Edit
+            </button>
+        </div>
+        <div class="col-1">
+            <form method="POST" action="/{{ category }}">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="item" value="{{ item.id }}">
+                <button type="submit" class="btn btn-primary w-100">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </div>
+
+    {% block extrainfo %}
+    {% endblock %}
+
+    <form class="row-cols-lg-auto" method="POST" action="/{{ category }}">
+        <div class="row collapse bg-dark-subtle p-2 border border-bottom-0 border-black border-2" id="item-{{ item.id }}">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="item" value="{{ item.id }}">
+            <div class="col-11">
+                {% block editformitems %}
+                <input type="text" id="item-{{ item.id }}-new-name" name="newname" value="{{ item.name }}" placeholder="{{ category }} name">
+                {% endblock %}
+            </div>
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary w-100">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+    {% endfor %}
+    <div class="row bg-body-secondary p-2 border border-black border-2">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <button class="btn btn-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#additem" aria-expanded="false" aria-condivols="additem">
+                + Add a new {{ category }}
+            </button>
+        </div>
+    </div>
+    <form class="row-cols-lg-auto" method="POST" action="/{{ category }}">
+        <div class="row collapse bg-dark-subtle p-2 border border-top-0 border-black border-2" id="additem">
+            <input type="hidden" name="_method" value="POST">
+            <div class="col-11">
+                {{ self.editformitems() }}
+            </div>
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary w-100">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

@@ -21,7 +21,7 @@ def post_topping():
 
 
 def add_topping(request):
-    name = request.form.get('new-topping-name')
+    name = request.form.get('newname')
     if Topping.query.filter_by(name=name).first() is not None:
         flash('Error: cannot add duplicate topping ' + name, 'danger')
     else:
@@ -32,7 +32,7 @@ def add_topping(request):
     return redirect(url_for('pages.home'))
 
 def edit_topping(request):
-    id = request.form.get('topping')
+    id = request.form.get('item')
     newname = request.form.get('newname')
     topping = Topping.query.filter_by(id=id).first()
     if topping is None:
@@ -46,7 +46,7 @@ def edit_topping(request):
     return redirect(url_for('pages.home'))
 
 def delete_topping(request):
-    id = request.form.get('topping')
+    id = request.form.get('item')
     topping = Topping.query.filter_by(id=id).first()
     if topping is None:
         flash('Error: topping not found', 'danger')
