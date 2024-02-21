@@ -6,12 +6,12 @@ from .auth import auth
 from .topping import topping
 from .pizza import pizza
 from .database import db
-from . import models
+from . import models, settings
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'supersecret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = settings.DATABASE_CONNECTION_STRING
 
 database.init_db(app)
 
