@@ -1,9 +1,1 @@
 {% extends "home.html" %}
-
-{% block editformitems %}
-<input type="text" id="item-{{ item.id }}-new-name" name="newname" value="{{ item.name }}" placeholder="Topping name">
-{% endblock %}
-
-{% block addformitems %}
-<input type="text" id="item-new-name" name="newname" value="" placeholder="Topping name">
-{% endblock %}
