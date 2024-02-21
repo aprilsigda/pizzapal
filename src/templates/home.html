@@ -33,7 +33,7 @@
             <input type="hidden" name="item" value="{{ item.id }}">
             <div class="col-11">
                 <input class="mb-3" type="text" id="item-{{ item.id }}-new-name" name="newname" value="{{ item.name }}" placeholder="{{ category }} name">
-                {% set onpizza = pizzatoppings[loop.index0] %}
+                {% set index = loop.index0 %}
                 {% block formitems scoped %}{% endblock %}
             </div>
             <div class="col-1">
