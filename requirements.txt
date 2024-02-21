@@ -5,3 +5,5 @@
 azure-functions
 Flask
 Flask-SQLAlchemy
+Flask-Login
+Werkzeug
