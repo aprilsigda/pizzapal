@@ -32,3 +32,7 @@ If everything completed successfully, the application will be listening on <http
 ## Usage
 
 When loading PizzaPal, you are presented with a login screen. To add a user, use the 'Signup' link in the top right corner. After signing in to the application, you will see either the Manage Toppings page or the Manage Pizzas page, depending on whether you are logged in as a manager or a chef. On these pages, you can view, edit, and delete existing toppings and pizzas, and you can create new ones.
+
+## Technical choices
+
+When developing this application, I chose to use Python with Flask as the backend framework. Flask is an excellent framework for creating web applications, and it is one that I was already familiar with which made it an easy choice. On the frontend, I used Bootstrap to style the interface components. I chose Bootstrap for its simplicity and ease of use. The backend database runs on SQLite, but because I used SQLAlchemy as an interface it would be trivial to swap out the backend for a different SQL server. The demo is hosted on a Google Cloud Compute VM, which I chose because its free plan is sufficient to host a simple web app.
