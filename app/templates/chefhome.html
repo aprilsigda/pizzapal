@@ -1,5 +1,17 @@
 {% extends "home.html" %}
 
+{% block extrainfo %}
+<div>
+<ul style="list-style-type: none; margin: 0; padding: 0;">
+{% for topping in toppings %}
+{% if item is not none and topping.id in pizzatoppings[index] %}
+<li>- <em>{{ topping.name }}</em></li>
+{% endif %}
+{% endfor %}
+</ul>
+</div>
+{% endblock %}
+
 {% block formitems %}
 {% for topping in toppings %}
 <div class="row mb-3 ps-3">
