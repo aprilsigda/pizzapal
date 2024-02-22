@@ -1,3 +1,10 @@
+'''
+File: __init__.py
+Author: April Sigda
+Purpose: This is the entrypoint for the application. It sets
+    up the database, login manager, and registers all the
+    request handler blueprints.
+'''
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
