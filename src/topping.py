@@ -1,13 +1,23 @@
+'''
+File: topping.py
+Author: April Sigda
+Purpose: Handles interactions invoked from the topping management
+    interface
+'''
+
 from flask import Blueprint, request, flash, redirect, url_for
 from .models import Topping, PizzaToppings
 from .database import db
 
 topping = Blueprint('topping', __name__)
 
+# Returns a list of all toppings.
 @topping.route('/topping')
 def get_toppings():
     return Topping.query.all()
 
+# Since HTML forms only support GET and POST, we use a hidden
+# field to distinguish POST, PUT, and DELETE
 @topping.route('/topping', methods=['POST'])
 def post_topping():
     method = request.form.get('_method')
@@ -19,7 +29,12 @@ def post_topping():
         return delete_topping(request)
     return "error"
 
-
+# Add a new topping to the database. Does not allow duplicate
+# topping names
+# Request body parameters:
+# - 'newname' (string): the name of the new topping
+# Returns:
+# - Redirect to the home page. Displays a success or error message
 def add_topping(request):
     name = request.form.get('newname')
     if Topping.query.filter_by(name=name).first() is not None:
@@ -31,6 +46,13 @@ def add_topping(request):
         flash('Success: added topping ' + name, 'success')
     return redirect(url_for('pages.home'))
 
+# Edit a topping in the database. Does not allow duplicate topping
+# names
+# Request body parameters:
+# - 'item' (string): the internal ID number of the topping to edit
+# - 'newname' (string): the updated name for the selected topping
+# Returns:
+# - Redirect to the home page. Displays a success or error message
 def edit_topping(request):
     id = request.form.get('item')
     newname = request.form.get('newname')
@@ -45,6 +67,11 @@ def edit_topping(request):
         flash('Success: updated topping to ' + newname, 'success')
     return redirect(url_for('pages.home'))
 
+# Removes a topping from the database
+# Request body parameters:
+# - 'item' (string): the internal ID number of the topping to delete
+# Returns:
+# - Redirect to the home page. Displays a success or error message
 def delete_topping(request):
     id = request.form.get('item')
     topping = Topping.query.filter_by(id=id).first()
