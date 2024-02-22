@@ -3,7 +3,7 @@ File: auth.py
 Author: April Sigda
 Purpose: Handles all authentication-related requests
 '''
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
@@ -30,6 +30,7 @@ def login_post():
 
     user = User.query.filter_by(username=uname).first()
     if user is None or not check_password_hash(user.password, password):
+        flash('Error: invalid password', 'danger')
         return redirect(url_for('auth.login'))
 
     login_user(user)
@@ -59,6 +60,7 @@ def signup_post():
 
     user = User.query.filter_by(username=uname).first()
     if user is not None:
+        flash(f'Error: user {uname} already exists', 'danger')
         return redirect(url_for('auth.signup'))
 
     new_user = User(username=uname, password=generate_password_hash(password, method="pbkdf2"), role=role)
@@ -66,6 +68,7 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
 
+    flash(f'User {uname} created successfully. Please log in now', 'success')
     return redirect(url_for('auth.login'))
 
 # Logs out the currently authenticated user and
@@ -73,4 +76,5 @@ def signup_post():
 @auth.route('/logout')
 def logout():
     logout_user()
+    flash('You have been logged out successfully', 'success')
     return redirect('/login')
